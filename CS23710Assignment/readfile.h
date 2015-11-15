@@ -12,7 +12,7 @@
 
 FILE* openConfigFile (Competition_t* competition_ptr, const char * filename);
 
-Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_t ** comp_ptr_ptr);
+Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr_t* comp_ptr_ptr);
 
 #endif /* READFILE_H */
 

@@ -8,7 +8,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define PROCESS_FILENAME "hort_2013.txt"
+#define PROCESS_FILENAME "hort_2014.txt"
 
 #define MAX_LINE_LENGTH 128
 
@@ -16,8 +16,10 @@
 /* #define INCH_TO_METERS =  0.0254; */
 
 #define LOG_ERR 1
-#define LOG_DEBUG 1
+#define LOG_INFO 0
+#define LOG_DEBUG 0
 #define LOG_DEBUG_DETAIL 0
+
 #define ERR_FLOAT -1
 
 #endif /* GLOBALS_H */

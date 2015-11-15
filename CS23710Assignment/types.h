@@ -9,6 +9,7 @@
 #define TYPES_H
 
 #include "globals.h"
+
 /*
  * 
  */
@@ -28,6 +29,25 @@ typedef struct Competitor_struct
 } Competitor_t;
 
 /*
+ * pointer 
+ */
+typedef Competitor_t* Competitor_ptr_t;
+
+/*
+ * data type for the node
+ */
+typedef struct Comp_tree_node{
+	Competitor_ptr_t content_ptr;
+	struct Comp_tree_node* left;
+	struct Comp_tree_node* right;
+} Comp_tree_node_t;
+
+/*
+ * pointer to the root of the tree
+ */
+typedef Comp_tree_node_t* Comp_tree_node_ptr_t;
+
+/*
  * 
  */
 typedef struct Competition_struct
@@ -36,7 +56,7 @@ typedef struct Competition_struct
     int competitor_count;
     char name[MAX_LINE_LENGTH];
     char date[MAX_LINE_LENGTH];
-    Competitor_t** competitor;
+    Comp_tree_node_ptr_t root_ptr;
 
 } Competition_t;
 

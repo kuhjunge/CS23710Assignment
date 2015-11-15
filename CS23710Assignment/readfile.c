@@ -20,11 +20,11 @@ char* readNextLine(FILE *f, char *linebuffer){
     {	
         fgets(linebuffer, MAX_LINE_LENGTH, f);
         if (strcmp(linebuffer, "")==0) {
-            if(LOG_ERR) {printf("%s\n", "Error reading process-info file: empty line");}
+            if(LOG_INFO) {printf("%s\n", "INFO: Found empty line - stop reading");}
             return NULL;			// error occured: line is empty
         }
         else {
-            if(LOG_DEBUG_DETAIL) { printf("Read from File: %s", linebuffer);}
+            if(LOG_DEBUG_DETAIL) { printf("DEBUG: Read from File: %s", linebuffer);}
         }
     }
     return &linebuffer[0];
@@ -35,7 +35,7 @@ float readVegOrFruitNextLine(FILE *f, char *linebuffer){
     float inch;
     if (readNextLine(f, linebuffer) != NULL){ // length_cucumber; 
         sscanf (linebuffer, " %d %f", &feet, &inch);
-        if(LOG_DEBUG_DETAIL) { printf("Data: %d %f \n", feet, inch);}
+        if(LOG_DEBUG_DETAIL) { printf("DEBUG: Data: %d %f \n", feet, inch);}
         inch += feet * FEET_TO_INCH;
     } else { return ERR_FLOAT; }
     return inch;
@@ -49,7 +49,7 @@ FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
     // test for success and error handling
     if (competition_ptr->process_file == NULL)
     {
-       if(LOG_ERR) { printf("File opening failed\n");}
+       if(LOG_ERR) { printf("ERROR: File opening failed\n");}
        return NULL;
     }
    /* Read Competition Name */
@@ -66,10 +66,10 @@ FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
    return competition_ptr->process_file;
 }
 
-Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_t ** comp_ptr_ptr){
+Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr_t* comp_ptr_ptr){
    char linebuffer[MAX_LINE_LENGTH + 1]="";
    Competitor_t* comp_ptr;
-   *comp_ptr_ptr = (Competitor_t*)calloc(1, sizeof(Competitor_t));
+   *comp_ptr_ptr = (Competitor_ptr_t)calloc(1, sizeof(Competitor_t));
    comp_ptr = *comp_ptr_ptr; 
    comp_ptr->number = competition_ptr->competitor_count++ +1; /*Competitor is new*/
    
@@ -92,7 +92,7 @@ Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_t *
             comp_ptr->length_cucumber != ERR_FLOAT) {
             
              if(LOG_DEBUG) { 
-                 printf("Name: %s\nNumber: %d\nAddress: %s\nFon: %s\nCucumber: %f\nCarrot: %f\nRunner Bean: %f\n---------------------------------\n",
+                 printf("DEBUG: Name: %s\nNumber: %d\nAddress: %s\nFon: %s\nCucumber: %f\nCarrot: %f\nRunner Bean: %f\n---------------------------------\n",
                     comp_ptr->name, comp_ptr->number, comp_ptr->address,
                     comp_ptr->phone_number, comp_ptr->length_cucumber,
                     comp_ptr->length_carrot, comp_ptr->length_runner_bean);
@@ -101,7 +101,7 @@ Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_t *
         }
    }
    
-   if(LOG_ERR) { printf("Competitor data corrupted or no competitor found!\n"); }
+   if(LOG_INFO) { printf("ERROR: Competitor data corrupted or no competitor found!\n"); }
    free(comp_ptr); /* Remove the non existent competitor*/
    return NULL;
 }

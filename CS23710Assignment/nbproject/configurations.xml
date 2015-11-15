@@ -4,6 +4,7 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>bintree.h</itemPath>
       <itemPath>globals.h</itemPath>
       <itemPath>readfile.h</itemPath>
       <itemPath>types.h</itemPath>
@@ -44,6 +45,8 @@
       </compileType>
       <item path="bintree.c" ex="false" tool="0" flavor2="0">
       </item>
+      <item path="bintree.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="globals.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="hort_2013.txt" ex="false" tool="3" flavor2="0">
@@ -78,6 +81,8 @@
         </asmTool>
       </compileType>
       <item path="bintree.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="bintree.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="globals.h" ex="false" tool="3" flavor2="0">
       </item>
