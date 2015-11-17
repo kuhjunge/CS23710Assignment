@@ -7,7 +7,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "types.h"
 
 char* readNextLine(FILE *f, char *linebuffer){
@@ -54,12 +53,10 @@ FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
     }
    /* Read Competition Name */
    if (readNextLine(competition_ptr->process_file, linebuffer) != NULL){
-        strlcpy(competition_ptr->name,linebuffer,MAX_LINE_LENGTH);
-
+        sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", competition_ptr->name);
         /* Read Competition Date */
         readNextLine(competition_ptr->process_file, linebuffer);
-        strlcpy(competition_ptr->date,linebuffer,MAX_LINE_LENGTH);
-        
+        sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", competition_ptr->date);
         competition_ptr->competitor_count = 0;
    }
    else return NULL;

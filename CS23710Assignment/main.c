@@ -7,9 +7,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "readfile.h"
 #include "types.h"
-#include "bintree.h"
 #include "helper_functions.h"
 
 
@@ -24,6 +22,7 @@ int main(int argc, char** argv) {
     if (read_file(comp_ptr, filename)){
         print_task_one(comp_ptr);
     }
+    cleanup(comp_ptr); // Free everything
     return (EXIT_SUCCESS);
 }
 

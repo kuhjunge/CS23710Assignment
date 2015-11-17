@@ -7,7 +7,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "types.h"
+#include "bintree.h"
+#include "readfile.h"
 
 int calc_foot_length(float length){
     if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate inch lenght\n"); }
@@ -61,7 +64,7 @@ int read_file(Competition_t* competition_ptr,const char * filename){
 void print_task_one(Competition_t* competition_ptr){
     if (competition_ptr == NULL){ return;}
     printf("Competition: %s Date: %s\n", competition_ptr->name, competition_ptr->date);
-    printf("NAME\tcompetitor number    Cucumber    carrot    Runner Bean   Total Length\n");
+    printf("NAME\tcompetitor number    Cucumber    Carrot    Runner Bean   Total Length\n");
     printf("==============================================================================\n");
     inorder(&competition_ptr->root_ptr, &print_line_competitor);
 }
@@ -71,4 +74,13 @@ void print_task_two(Competition_t* competition_ptr){
     printf("Competition: %s Date: %s\n", competition_ptr->name, competition_ptr->date);
     printf("Competitor Contact Details.\n");
     inorder(&competition_ptr->root_ptr, &print_address_competitor);
+}
+
+void cleanup(Competition_t* competition_ptr){
+    delete_tree(&competition_ptr->root_ptr);
+    competition_ptr->root_ptr = NULL;
+    competition_ptr->process_file = NULL;
+    strcpy(competition_ptr->date,"");
+    strcpy(competition_ptr->name,"");
+    competition_ptr->competitor_count = 0;
 }

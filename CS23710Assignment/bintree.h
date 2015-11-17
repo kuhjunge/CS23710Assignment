@@ -20,6 +20,6 @@ void insert_node(Comp_tree_node_ptr_t* root_ptr, Competitor_ptr_t comp_ptr);
 
 void inorder(Comp_tree_node_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t));
 
-
+void delete_tree(Comp_tree_node_ptr_t* root_ptr);
 #endif /* BINTREE_H */
 

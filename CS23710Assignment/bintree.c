@@ -16,7 +16,16 @@ void inorder(Comp_tree_node_ptr_t* root_ptr, void (*pointer_to_function)(Competi
     inorder(&(*root_ptr)->left, pointer_to_function );
     pointer_to_function((*root_ptr)->content_ptr);
     inorder(&(*root_ptr)->right, pointer_to_function);
-    if(LOG_DEBUG_DETAIL) { printf("DEBUG: free space!\n"); }
+    }
+}
+
+void delete_tree(Comp_tree_node_ptr_t* root_ptr){
+    if(LOG_DEBUG_DETAIL) { printf("DEBUG: delete tree\n"); }
+    if(*root_ptr != NULL)
+   {
+    delete_tree(&(*root_ptr)->left);
+    delete_tree(&(*root_ptr)->right);
+    if(LOG_DEBUG_DETAIL) { printf("DEBUG: free space of Node!\n"); }
     free((*root_ptr)->content_ptr);
     free(*root_ptr);
     }

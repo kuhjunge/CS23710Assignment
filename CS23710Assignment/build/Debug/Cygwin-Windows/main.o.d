@@ -1,12 +1,8 @@
-build/Debug/Cygwin-Windows/main.o: main.c readfile.h types.h globals.h \
- bintree.h helper_functions.h
-
-readfile.h:
+build/Debug/Cygwin-Windows/main.o: main.c types.h globals.h \
+ helper_functions.h
 
 types.h:
 
 globals.h:
-
-bintree.h:
 
 helper_functions.h:
