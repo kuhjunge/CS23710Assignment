@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/bintree.o \
+	${OBJECTDIR}/helper_functions.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/readfile.o
 
@@ -68,6 +69,11 @@ ${OBJECTDIR}/bintree.o: bintree.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bintree.o bintree.c
+
+${OBJECTDIR}/helper_functions.o: helper_functions.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helper_functions.o helper_functions.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}

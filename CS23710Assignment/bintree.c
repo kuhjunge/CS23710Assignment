@@ -7,12 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bintree.h"
-// #include "globals.h"
-
-float calc_total_lenght(Competitor_ptr_t comp_ptr){
-    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate total lenght\n"); }
-    return comp_ptr->length_cucumber + comp_ptr->length_carrot + comp_ptr->length_runner_bean;
-}
+#include "helper_functions.h"
 
 void inorder(Comp_tree_node_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t)){
     if(LOG_DEBUG_DETAIL) { printf("DEBUG: inorder Sort\n"); }

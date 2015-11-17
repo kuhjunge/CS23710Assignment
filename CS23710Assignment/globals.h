@@ -8,7 +8,7 @@
 #ifndef GLOBALS_H
 #define GLOBALS_H
 
-#define PROCESS_FILENAME "hort_2014.txt"
+#define PROCESS_FILENAME "hort_2013.txt"
 
 #define MAX_LINE_LENGTH 128
 

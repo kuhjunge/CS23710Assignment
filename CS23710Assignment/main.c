@@ -10,13 +10,8 @@
 #include "readfile.h"
 #include "types.h"
 #include "bintree.h"
+#include "helper_functions.h"
 
-void print_competitor(Competitor_ptr_t competitor){
-    printf("Name: %s\nNumber: %d\nAddress: %s\nFon: %s\nCucumber: %f\nCarrot: %f\nRunner Bean: %f\n",
-            competitor->name, competitor->number, competitor->address,
-            competitor->phone_number, competitor->length_cucumber,
-            competitor->length_carrot, competitor->length_runner_bean);
-}
 
 /*
  * 
@@ -32,7 +27,7 @@ int main(int argc, char** argv) {
         while (readNextCompetitor(comp_ptr, &competitor_ptr)!=NULL){
         insert_node(&comp_ptr->root_ptr, competitor_ptr);
         }
-        inorder(&comp_ptr->root_ptr, &print_competitor);
+        inorder(&comp_ptr->root_ptr, &print_address_competitor);
     }
     return (EXIT_SUCCESS);
 }
