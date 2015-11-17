@@ -37,15 +37,15 @@ void insert_node(Comp_tree_node_ptr_t* root_ptr, Competitor_ptr_t comp_ptr){
     else{
         if(LOG_DEBUG_DETAIL) { printf(" - Sort in \n"); }
 	// if the  of the new process is lower than the duration of the process of the node, insert the new process to the left
-        if (calc_total_lenght((*root_ptr)->content_ptr) > calc_total_lenght(comp_ptr)){
+        if (calc_total_length((*root_ptr)->content_ptr) > calc_total_length(comp_ptr)){
             insert_node(&((*root_ptr)->left),comp_ptr);
         }
         // if the duration of the new process is higher than the duration of the process of the node, insert the new process to the right
-        if (calc_total_lenght(comp_ptr) > calc_total_lenght((*root_ptr)->content_ptr)){
+        if (calc_total_length(comp_ptr) > calc_total_length((*root_ptr)->content_ptr)){
             insert_node(&((*root_ptr)->right),comp_ptr);
         }
         // if the duration of the new process and the duration of the process of the node are the same, insert the new process to the left
-        if (calc_total_lenght((*root_ptr)->content_ptr) == calc_total_lenght(comp_ptr)){
+        if (calc_total_length((*root_ptr)->content_ptr) == calc_total_length(comp_ptr)){
             insert_node(&((*root_ptr)->left),comp_ptr);
         }
     }

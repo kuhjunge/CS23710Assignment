@@ -76,7 +76,7 @@ Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr
    // Check if there is another competitor and read its name
    if (readNextLine(competition_ptr->process_file, linebuffer)!= NULL){ // Name
        /* put Name into the data structure */
-        sscanf (linebuffer, "%[a-zA-Z_- ]", comp_ptr->name);
+        sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", comp_ptr->name);
         readNextLine(competition_ptr->process_file, linebuffer); // Address
         sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", comp_ptr->address);
         readNextLine(competition_ptr->process_file, linebuffer); // Phone Number

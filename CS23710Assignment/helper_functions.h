@@ -20,7 +20,13 @@ void print_line_competitor(Competitor_ptr_t competitor);
 
 void print_address_competitor(Competitor_ptr_t competitor);
 
-float calc_total_lenght(Competitor_ptr_t comp_ptr);
+float calc_total_length(Competitor_ptr_t comp_ptr);
+
+int read_file(Competition_t* competition_ptr,const char * filename);
+
+void print_task_one(Competition_t* competition_ptr);
+
+void print_task_two(Competition_t* competition_ptr);
 
 #endif /* HELPER_FUNCTION_H */
 
