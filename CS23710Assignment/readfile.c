@@ -93,6 +93,8 @@ Competitor_t* read_next_competitor (Competition_t* competition_ptr, Competitor_p
    *comp_ptr_ptr = (Competitor_ptr_t)calloc(1, sizeof(Competitor_t));
    comp_ptr = *comp_ptr_ptr; 
    comp_ptr->number = competition_ptr->competitor_count++ +1; /*Competitor is new*/
+   comp_ptr->right = NULL; 
+   comp_ptr->left = NULL;
    
    // Check if there is another competitor and read its name
    if (read_next_line(competition_ptr->process_file, linebuffer)!= NULL){ // Name

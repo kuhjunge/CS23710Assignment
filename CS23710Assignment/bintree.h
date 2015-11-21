@@ -6,7 +6,7 @@
 
 /* 
  * File:   bintree.h
- * Author: Kuhjunge
+ * Author: Chris Deter
  *
  * Created on 15. November 2015, 18:41
  */
@@ -16,10 +16,10 @@
 
 #include "types.h"
 
-void insert_node(Comp_tree_node_ptr_t* root_ptr, Competitor_ptr_t comp_ptr);
+void insert_node(Competitor_ptr_t* root_ptr, Competitor_ptr_t comp_ptr);
 
-void inorder(Comp_tree_node_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t));
+void inorder(Competitor_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t));
 
-void delete_tree(Comp_tree_node_ptr_t* root_ptr);
+void delete_tree(Competitor_ptr_t* root_ptr);
 #endif /* BINTREE_H */
 

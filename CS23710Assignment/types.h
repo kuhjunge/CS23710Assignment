@@ -13,6 +13,7 @@
 /*
  * Struct for the competitor
  * Contains personal data and the lengths of the fruits/vegetables
+ * It is also used as a Tree Node
  */
 typedef struct Competitor_struct
 {
@@ -26,6 +27,8 @@ typedef struct Competitor_struct
     float length_cucumber; 
     float length_carrot;
     float length_runner_bean;
+    struct Competitor_struct* left;
+    struct Competitor_struct* right;
 
 } Competitor_t;
 
@@ -33,20 +36,6 @@ typedef struct Competitor_struct
  * pointer of competitor struct
  */
 typedef Competitor_t* Competitor_ptr_t;
-
-/*
- * data type for the node
- */
-typedef struct Comp_tree_node{
-    Competitor_ptr_t content_ptr;
-    struct Comp_tree_node* left;
-    struct Comp_tree_node* right;
-} Comp_tree_node_t;
-
-/*
- * pointer to the root of the tree
- */
-typedef Comp_tree_node_t* Comp_tree_node_ptr_t;
 
 /*
  * Struct for the competition
@@ -57,7 +46,7 @@ typedef struct Competition_struct
     int competitor_count;
     char name[MAX_LINE_LENGTH];
     char date[MAX_LINE_LENGTH];
-    Comp_tree_node_ptr_t root_ptr;
+    Competitor_ptr_t root_ptr;
 
 } Competition_t;
 

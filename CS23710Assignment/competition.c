@@ -46,6 +46,10 @@ float calc_total_length(Competitor_ptr_t comp_ptr){
     return comp_ptr->length_cucumber + comp_ptr->length_carrot + comp_ptr->length_runner_bean;
 }
 
+/**
+ * prints the basic information of one competitor
+ * @param competitor
+ */
 void print_competitor(Competitor_ptr_t competitor){
     printf("Name: %s\nNumber: %d\nAddress: %s\nFon: %s\nCucumber: %f\nCarrot: %f\nRunner Bean: %f\n",
             competitor->name, competitor->number, competitor->address,
@@ -53,6 +57,10 @@ void print_competitor(Competitor_ptr_t competitor){
             competitor->length_carrot, competitor->length_runner_bean);
 }
 
+/**
+ * Prints all information that are relevant for the competition in one line
+ * @param competitor
+ */
 void print_line_competitor(Competitor_ptr_t competitor){
     printf("%s\t%d\t%2dft %4.1fin   %2dft %4.1fin   %2dft %4.1fin   %2dft %4.1fin\n",
             competitor->name, competitor->number,
@@ -62,12 +70,22 @@ void print_line_competitor(Competitor_ptr_t competitor){
             calc_foot_length(calc_total_length(competitor)),calc_inch_length(calc_total_length(competitor)));
 }
 
+/**
+ * prints a competitor and his address
+ * @param competitor
+ */
 void print_address_competitor(Competitor_ptr_t competitor){
     printf("Competitor Name: %s\nPostal Address: %s\nTelephone: %s\n\n",
             competitor->name, competitor->address,
             competitor->phone_number);
 }
 
+/**
+ * reads and processes a file
+ * @param competition_ptr
+ * @param filename
+ * @return 
+ */
 int read_file(Competition_t* competition_ptr,const char * filename){
     Competitor_ptr_t competitor_ptr;
     competition_ptr->root_ptr = NULL; // initialise with NULL
