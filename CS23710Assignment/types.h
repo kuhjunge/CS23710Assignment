@@ -1,6 +1,6 @@
 /* 
  * File:   globals.h
- * Author: Kuhjunge
+ * Author: Chris Deter
  *
  * Created on 12. November 2015, 12:24
  */
@@ -11,7 +11,8 @@
 #include "globals.h"
 
 /*
- * 
+ * Struct for the competitor
+ * Contains personal data and the lengths of the fruits/vegetables
  */
 typedef struct Competitor_struct
 {
@@ -29,7 +30,7 @@ typedef struct Competitor_struct
 } Competitor_t;
 
 /*
- * pointer 
+ * pointer of competitor struct
  */
 typedef Competitor_t* Competitor_ptr_t;
 
@@ -37,9 +38,9 @@ typedef Competitor_t* Competitor_ptr_t;
  * data type for the node
  */
 typedef struct Comp_tree_node{
-	Competitor_ptr_t content_ptr;
-	struct Comp_tree_node* left;
-	struct Comp_tree_node* right;
+    Competitor_ptr_t content_ptr;
+    struct Comp_tree_node* left;
+    struct Comp_tree_node* right;
 } Comp_tree_node_t;
 
 /*
@@ -48,7 +49,7 @@ typedef struct Comp_tree_node{
 typedef Comp_tree_node_t* Comp_tree_node_ptr_t;
 
 /*
- * 
+ * Struct for the competition
  */
 typedef struct Competition_struct
 {

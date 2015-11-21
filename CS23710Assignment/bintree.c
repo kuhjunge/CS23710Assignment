@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bintree.h"
-#include "helper_functions.h"
+#include "competition.h"
 
 void inorder(Comp_tree_node_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t)){
     if(LOG_DEBUG_DETAIL) { printf("DEBUG: inorder Sort\n"); }

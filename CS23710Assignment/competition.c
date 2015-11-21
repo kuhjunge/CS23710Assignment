@@ -1,29 +1,48 @@
 /* 
  * File:   main.c
- * Author: Kuhjunge
+ * Author: Chris Deter
  *
  * Created on 12. November 2015, 12:22
+ * 
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "types.h"
+#include "competition.h"
 #include "bintree.h"
 #include "readfile.h"
 
+/*
+ * reads the name for the file to be opened
+ */
+void readFileName(char* string){
+    printf("Name of the File:\n"); 
+    scanf("%30[a-zA-Z0-9-_.]", &string[0]);
+}
+
+/*
+ * converts inch to (integer) foot
+ */
 int calc_foot_length(float length){
-    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate inch lenght\n"); }
+    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate inch length\n"); }
     return (int) length / FEET_TO_INCH;
 }
 
+/*
+ * removes foot from the length 
+ */
 float calc_inch_length(float length){
-    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate inch lenght\n"); }
+    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate inch length\n"); }
     return length - (FEET_TO_INCH*calc_foot_length(length));
 }
 
+/*
+ * calculates the l
+ */
 float calc_total_length(Competitor_ptr_t comp_ptr){
-    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate total lenght\n"); }
+    if(LOG_DEBUG_DETAIL) { printf("DEBUG: Calculate total length\n"); }
     return comp_ptr->length_cucumber + comp_ptr->length_carrot + comp_ptr->length_runner_bean;
 }
 
@@ -52,8 +71,8 @@ void print_address_competitor(Competitor_ptr_t competitor){
 int read_file(Competition_t* competition_ptr,const char * filename){
     Competitor_ptr_t competitor_ptr;
     competition_ptr->root_ptr = NULL; // initialise with NULL
-    if (openConfigFile(competition_ptr, filename) != NULL){
-        while (readNextCompetitor(competition_ptr, &competitor_ptr) != NULL){
+    if (open_config_file(competition_ptr, filename) != NULL){
+        while (read_next_competitor(competition_ptr, &competitor_ptr) != NULL){
             insert_node(&competition_ptr->root_ptr, competitor_ptr);
         }
         return 1;

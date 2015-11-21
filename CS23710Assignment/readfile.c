@@ -3,13 +3,20 @@
  * Author: Kuhjunge
  *
  * Created on 12. November 2015, 12:22
+ * 
+ * This file contains functions that opens a file and reads a line of this File
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "types.h"
+#include "readfile.h"
 
-char* readNextLine(FILE *f, char *linebuffer){
+/*
+ * Reads a line in the File
+ * Needs the File and a linebuffer string as parameters
+ * returns the line (or NULL in case of Error)
+ */
+char* read_next_line(FILE *f, char *linebuffer){
     if (f==NULL) return NULL;		// error: file handle not initialised
     if (feof(f)){
         fclose (f);			// close the file on reaching EOF
@@ -29,10 +36,16 @@ char* readNextLine(FILE *f, char *linebuffer){
     return &linebuffer[0];
 }
 
-float readVegOrFruitNextLine(FILE *f, char *linebuffer){
+/*
+ * Reads a line in the File and converts first a Foot integer
+ * and then a float Inch and converts them to an inch value for both combined 
+ * Needs the File and a linebuffer string as parameters
+ * returns the combined inch value (or ERR_FLOAT in case of Error)
+ */
+float read_veg_or_fruit_next_line(FILE *f, char *linebuffer){
     int feet;
     float inch;
-    if (readNextLine(f, linebuffer) != NULL){ // length_cucumber; 
+    if (read_next_line(f, linebuffer) != NULL){ // length_cucumber; 
         sscanf (linebuffer, " %d %f", &feet, &inch);
         if(LOG_DEBUG_DETAIL) { printf("DEBUG: Data: %d %f \n", feet, inch);}
         inch += feet * FEET_TO_INCH;
@@ -40,7 +53,12 @@ float readVegOrFruitNextLine(FILE *f, char *linebuffer){
     return inch;
 }
 
-FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
+/*
+ * Open the File and save the File struct in the competition struct
+ * Needs a competition struct pointer and a string with the filename
+ * returns the FILE (or NULL in case of Error)
+ */
+FILE* open_config_file (Competition_t* competition_ptr, const char * filename)
 {
     char linebuffer[MAX_LINE_LENGTH + 1] = ""; // read buffer for file-input
     // try to open file for read
@@ -51,11 +69,11 @@ FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
        if(LOG_ERR) { printf("ERROR: File opening failed\n");}
        return NULL;
     }
-   /* Read Competition Name */
-   if (readNextLine(competition_ptr->process_file, linebuffer) != NULL){
+   /* Try to read Competition Name */
+   if (read_next_line(competition_ptr->process_file, linebuffer) != NULL){
         sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", competition_ptr->name);
         /* Read Competition Date */
-        readNextLine(competition_ptr->process_file, linebuffer);
+        read_next_line(competition_ptr->process_file, linebuffer);
         sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", competition_ptr->date);
         competition_ptr->competitor_count = 0;
    }
@@ -63,7 +81,13 @@ FILE* openConfigFile (Competition_t* competition_ptr, const char * filename)
    return competition_ptr->process_file;
 }
 
-Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr_t* comp_ptr_ptr){
+/*
+ * Reads a competitor from the file and create a Competitor struct to save the 
+ * Data in it.  
+ * Needs a pointer to the competition 
+ * returns the new competitior (or NULL in case of Error)
+ */
+Competitor_t* read_next_competitor (Competition_t* competition_ptr, Competitor_ptr_t* comp_ptr_ptr){
    char linebuffer[MAX_LINE_LENGTH + 1]="";
    Competitor_t* comp_ptr;
    *comp_ptr_ptr = (Competitor_ptr_t)calloc(1, sizeof(Competitor_t));
@@ -71,25 +95,30 @@ Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr
    comp_ptr->number = competition_ptr->competitor_count++ +1; /*Competitor is new*/
    
    // Check if there is another competitor and read its name
-   if (readNextLine(competition_ptr->process_file, linebuffer)!= NULL){ // Name
+   if (read_next_line(competition_ptr->process_file, linebuffer)!= NULL){ // Name
        /* put Name into the data structure */
         sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", comp_ptr->name);
-        readNextLine(competition_ptr->process_file, linebuffer); // Address
+        read_next_line(competition_ptr->process_file, linebuffer); // Address
         sscanf (linebuffer, "%[0-9a-zA-Z_- .,]", comp_ptr->address);
-        readNextLine(competition_ptr->process_file, linebuffer); // Phone Number
+        read_next_line(competition_ptr->process_file, linebuffer); // Phone Number
         sscanf (linebuffer, "%[0-9a-zA-Z_- ]", comp_ptr->phone_number);
         /* Read the vegetables  / Fruits */
         
-        comp_ptr->length_cucumber = readVegOrFruitNextLine(competition_ptr->process_file, linebuffer); // cucumber;
-        comp_ptr->length_carrot = readVegOrFruitNextLine(competition_ptr->process_file, linebuffer); // carrot
-        comp_ptr->length_runner_bean = readVegOrFruitNextLine(competition_ptr->process_file, linebuffer); // runner bean
+        comp_ptr->length_cucumber = read_veg_or_fruit_next_line(
+                competition_ptr->process_file, linebuffer); // cucumber;
+        comp_ptr->length_carrot = read_veg_or_fruit_next_line(
+                competition_ptr->process_file, linebuffer); // carrot
+        comp_ptr->length_runner_bean = read_veg_or_fruit_next_line(
+                competition_ptr->process_file, linebuffer); // runner bean
         
         if (comp_ptr->length_runner_bean != ERR_FLOAT && 
             comp_ptr->length_carrot != ERR_FLOAT &&
             comp_ptr->length_cucumber != ERR_FLOAT) {
             
              if(LOG_DEBUG) { 
-                 printf("DEBUG: Name: %s\nNumber: %d\nAddress: %s\nFon: %s\nCucumber: %f\nCarrot: %f\nRunner Bean: %f\n---------------------------------\n",
+                 printf("DEBUG: Name: %s\nNumber: %d\nAddress: %s\nFon: %s\n"
+                         "Cucumber: %f\nCarrot: %f\nRunner Bean: %f"
+                         "\n---------------------------------\n",
                     comp_ptr->name, comp_ptr->number, comp_ptr->address,
                     comp_ptr->phone_number, comp_ptr->length_cucumber,
                     comp_ptr->length_carrot, comp_ptr->length_runner_bean);
@@ -97,7 +126,7 @@ Competitor_t* readNextCompetitor (Competition_t* competition_ptr, Competitor_ptr
             return comp_ptr;
         }
    }
-   
+   /* Something went wrong */
    if(LOG_INFO) { printf("ERROR: Competitor data corrupted or no competitor found!\n"); }
    free(comp_ptr); /* Remove the non existent competitor*/
    return NULL;
