@@ -3,6 +3,8 @@
  * Author: Chris Deter
  *
  * Created on 12. November 2015, 12:24
+ * 
+ * This file contains the structs that are used in this application
  */
 
 #ifndef TYPES_H
@@ -10,7 +12,7 @@
 
 #include "globals.h"
 
-/*
+/**
  * Struct for the competitor
  * Contains personal data and the lengths of the fruits/vegetables
  * It is also used as a Tree Node
@@ -32,12 +34,12 @@ typedef struct Competitor_struct
 
 } Competitor_t;
 
-/*
+/**
  * pointer of competitor struct
  */
 typedef Competitor_t* Competitor_ptr_t;
 
-/*
+/**
  * Struct for the competition
  */
 typedef struct Competition_struct

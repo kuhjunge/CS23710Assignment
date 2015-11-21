@@ -3,6 +3,9 @@
  * Author: Chris Deter
  *
  * Created on 15. November 2015, 13:04
+ * 
+ * This files contains the global variables and constants
+ * that are used in this project
  */
 
 #ifndef GLOBALS_H
@@ -12,6 +15,7 @@
 
 #define FEET_TO_INCH 12
 
+#define SUCCESS 0
 #define LOG_ERR 1
 #define LOG_INFO 0
 #define LOG_DEBUG 0

@@ -1,6 +1,6 @@
 /* 
  * File:   readfile.c
- * Author: Kuhjunge
+ * Author: Chris Deter
  *
  * Created on 12. November 2015, 12:22
  * 
@@ -11,10 +11,14 @@
 #include <stdlib.h>
 #include "readfile.h"
 
-/*
+/**
+ * LOCAL HELPER FUNCTION
  * Reads a line in the File
  * Needs the File and a linebuffer string as parameters
  * returns the line (or NULL in case of Error)
+ * @param f pointer for the FILE 
+ * @param linebuffer string 
+ * @return linebuffer string with the content from a line of the File
  */
 char* read_next_line(FILE *f, char *linebuffer){
     if (f==NULL) return NULL;		// error: file handle not initialised
@@ -36,11 +40,15 @@ char* read_next_line(FILE *f, char *linebuffer){
     return &linebuffer[0];
 }
 
-/*
+/**
+ * LOCAL HELPER FUNCTION
  * Reads a line in the File and converts first a Foot integer
  * and then a float Inch and converts them to an inch value for both combined 
  * Needs the File and a linebuffer string as parameters
  * returns the combined inch value (or ERR_FLOAT in case of Error)
+ * @param f pointer for the FILE 
+ * @param linebuffer
+ * @return 
  */
 float read_veg_or_fruit_next_line(FILE *f, char *linebuffer){
     int feet;
@@ -53,10 +61,13 @@ float read_veg_or_fruit_next_line(FILE *f, char *linebuffer){
     return inch;
 }
 
-/*
+/**
  * Open the File and save the File struct in the competition struct
  * Needs a competition struct pointer and a string with the filename
- * returns the FILE (or NULL in case of Error)
+ * returns the FILE 
+ * @param competition_ptr
+ * @param filename
+ * @return pointer for the FILE (or NULL in case of Error)
  */
 FILE* open_config_file (Competition_t* competition_ptr, const char * filename)
 {
@@ -81,11 +92,14 @@ FILE* open_config_file (Competition_t* competition_ptr, const char * filename)
    return competition_ptr->process_file;
 }
 
-/*
+/**
  * Reads a competitor from the file and create a Competitor struct to save the 
  * Data in it.  
  * Needs a pointer to the competition 
  * returns the new competitior (or NULL in case of Error)
+ * @param competition_ptr pointer to the competition struct
+ * @param comp_ptr_ptr a pointer to a pointer to a competitior
+ * @return a allocated competitior filled with the data from the file
  */
 Competitor_t* read_next_competitor (Competition_t* competition_ptr, Competitor_ptr_t* comp_ptr_ptr){
    char linebuffer[MAX_LINE_LENGTH + 1]="";

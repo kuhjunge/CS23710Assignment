@@ -14,10 +14,11 @@
 #include "types.h"
 #include "competition.h"
 
-/*
+/**
  * main function that starts the program
+ * @return EXIT_SUCCESS at exit
  */
-int main(int argc, char** argv) { 
+int main(void) { 
     Competition_t comp;
     Competition_t* comp_ptr = &comp;
     char filename[MAX_LINE_LENGTH];
@@ -27,7 +28,7 @@ int main(int argc, char** argv) {
      * Open file and process content 
      * (if you can open the file) 
      */
-    if (read_file(comp_ptr, filename)){
+    if (read_file(comp_ptr, filename) == SUCCESS){
         print_task_one(comp_ptr);
     }
     /* clean the data from the competition and free the bintree */
