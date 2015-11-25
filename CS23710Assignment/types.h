@@ -1,9 +1,9 @@
-/* 
+/*
  * File:   globals.h
  * Author: Chris Deter
  *
  * Created on 12. November 2015, 12:24
- * 
+ *
  * This file contains the structs that are used in this application
  */
 
@@ -12,45 +12,54 @@
 
 #include "globals.h"
 
-/**
+/*
  * Struct for the competitor
  * Contains personal data and the lengths of the fruits/vegetables
  * It is also used as a Tree Node
  */
 typedef struct Competitor_struct
 {
-    /* ID of Competitor*/
+    /* ID of Competitor */
     int number;
+
     /* personal data */
     char name[MAX_LINE_LENGTH];
     char address[MAX_LINE_LENGTH];
     char phone_number[MAX_LINE_LENGTH];
+
     /* vegetables and fruit length in inches */
-    float length_cucumber; 
+    float length_cucumber;
     float length_carrot;
     float length_runner_bean;
-    struct Competitor_struct* left;
-    struct Competitor_struct* right;
 
+    struct Competitor_struct *left;
+
+
+    struct Competitor_struct *right;
 } Competitor_t;
 
-/**
+
+/*
  * pointer of competitor struct
  */
-typedef Competitor_t* Competitor_ptr_t;
+typedef Competitor_t * Competitor_ptr_t;
 
-/**
+/*
  * Struct for the competition
  */
 typedef struct Competition_struct
 {
-    FILE* process_file;
+    /* File that we use to read the data */
+    FILE * process_file;
+
+    /* stores the competitor count necessary to create the competitor ID */
     int competitor_count;
+
+    /* name and date of the competition */
     char name[MAX_LINE_LENGTH];
     char date[MAX_LINE_LENGTH];
+
+    /* pointer to the first Competitor (root of bintree) */
     Competitor_ptr_t root_ptr;
-
 } Competition_t;
-
 #endif /* TYPES_H */
-

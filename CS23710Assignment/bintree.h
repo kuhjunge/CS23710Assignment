@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   bintree.h
  * Author: Chris Deter
  *
@@ -10,26 +10,32 @@
 
 #include "types.h"
 
-/**
+/*
  * this function insert a new competitor in the tree (sorted) (recursive)
  * @param root_ptr tree root
  * @param comp_ptr pointer of the new node for the tree
  */
-void insert_node(Competitor_ptr_t* root_ptr, Competitor_ptr_t comp_ptr);
+void insert_node(Competitor_ptr_t * root_ptr,
+                 Competitor_ptr_t   comp_ptr);
 
-/**
- * traverses the tree in the direction in-order and calls the 
+/*
+ * traverses the tree in the direction in-order and calls the
  * pointer_to_function-Function for every node in the tree (recursive)
  * @param root_ptr treeroot
  * @param pointer_to_function the function that should be applied on every node
  */
-void inorder(Competitor_ptr_t* root_ptr, void (*pointer_to_function)(Competitor_ptr_t));
+void inorder(Competitor_ptr_t * root_ptr,
+             void (*pointer_to_function)(Competitor_ptr_t));
 
-/**
+/*
+ * traverses the tree in the direction in-order and prints every node in the tree in a table (recursive)
+ * @param pointer_to_function the function that should be applied on every node
+ */
+void inorder_tableprint(Competitor_ptr_t * root_ptr);
+
+/*
  * deletes the whole tree (recursive)
  * @param root_ptr treeroot
  */
-void delete_tree(Competitor_ptr_t* root_ptr);
-
+void delete_tree(Competitor_ptr_t * root_ptr);
 #endif /* BINTREE_H */
-
